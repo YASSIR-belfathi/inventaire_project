@@ -1,5 +1,8 @@
+# Class Diagram
+```mermaid
 
-classDiagram
+
+  classDiagram
     User <|-- Admin
     User <|-- Passager
     User : - email
@@ -100,3 +103,4 @@ classDiagram
     Admin "1.1" --> "1..*"Membre_equipage  : gerer
     
     Passager "1.1*" --> "1..*" Reservation : faire
+```
