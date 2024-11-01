@@ -28,17 +28,21 @@ public class PassagerService {
     	reservationRepository.deleteById(id);
     }
 	
-    public Reservation updateReservation(Long reservationId, Reservation updatedReservation) {
-        Optional<Reservation> existingReservation = reservationRepository.findById(reservationId);
-    	
-        existingReservation.setVol_reserve(updatedReservation.getVol_reserve());
-        existingReservation.setPassager_reservant(updatedReservation.getPassager_reservant());
-        existingReservation.setDate_reservation(updatedReservation.getDate_reservation());
-        existingReservation.setStatus(updatedReservation.getStatus());
-        existingReservation.setPrix_total(updatedReservation.getPrix_total());
+    public Reservation updateReservation(long id, Reservation updatedReservation) {
+        Optional<Reservation> existingReservation = reservationRepository.findById(id);
+    	if(existingReservation.isPresent()) {
+            Reservation existingReservation1 = existingReservation.get();
 
-    	
-        return reservationRepository.save(existingReservation);   
+            existingReservation1.setVol_reserve(updatedReservation.getVol_reserve());
+            existingReservation1.setPassager_reservant(updatedReservation.getPassager_reservant());
+            existingReservation1.setDate_reservation(updatedReservation.getDate_reservation());
+            existingReservation1.setStatus(updatedReservation.getStatus());
+            existingReservation1.setPrix_total(updatedReservation.getPrix_total());
+            return reservationRepository.save(existingReservation1); 
+    	}else {
+    		throw new IllegalArgumentException("Reservation avec l'ID " + id + " non trouvée.");
+    	}
+		  
         }
 
 }
