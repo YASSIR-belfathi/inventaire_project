@@ -1,6 +1,6 @@
-package repositories;
+package com.inventaire.Inventaire_Vols.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
-import entities.User;
+import com.inventaire.Inventaire_Vols.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 

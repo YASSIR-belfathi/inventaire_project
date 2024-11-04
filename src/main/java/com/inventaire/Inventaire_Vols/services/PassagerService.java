@@ -1,12 +1,12 @@
-package services;
+package com.inventaire.Inventaire_Vols.services;
 import java.util.Optional;
 
+import com.inventaire.Inventaire_Vols.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import entities.Reservation;
-import repositories.*;
+import com.inventaire.Inventaire_Vols.entities.Reservation;
 
 @Service
 public class PassagerService {

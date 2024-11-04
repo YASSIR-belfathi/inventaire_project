@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan(basePackages = "entities")  // Replace with your entity package
+@EntityScan(basePackages = "com/inventaire/Inventaire_Vols/entities")  // Replace with your entity package
 
 public class InventaireVolsApplication {
 
