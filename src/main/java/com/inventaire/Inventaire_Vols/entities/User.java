@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -16,10 +19,9 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column
 	private String email;
-	@Column
 	private String password;
-	@Column
 	private String nomComplet;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Role> Roles = new ArrayList<>();
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,6 +24,7 @@ public class Avion {
 	private Date annee_fabrication;
     @Column
 	private String model;
-
+    @ManyToMany(mappedBy = "avions")
+    private List<Aeoroport> aeoroports;
     
 }

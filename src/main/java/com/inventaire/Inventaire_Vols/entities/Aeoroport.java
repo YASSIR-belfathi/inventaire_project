@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -22,6 +25,14 @@ public class Aeoroport {
 	private String pays;
 	@Column
 	private int capacite;
+	@ManyToMany(mappedBy = "aeoroports",fetch = FetchType.EAGER)
+
+	@JoinTable(
+			name = "aeoroport_avion",
+			joinColumns = @JoinColumn(name = "aeoroportId"),
+			inverseJoinColumns = @JoinColumn(name = "avionId")
+	)
+	private List<Avion> avions=new ArrayList<>();
 
 
 	

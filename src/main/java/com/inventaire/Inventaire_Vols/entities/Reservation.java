@@ -1,4 +1,5 @@
 package com.inventaire.Inventaire_Vols.entities;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,20 +13,18 @@ import java.sql.Date;
 @NoArgsConstructor
 public class Reservation {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	@Column
-	private String vol_reserve;
-	@Column
-	private String passager_reservant;
-	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "passager_id")
+	private Passager passager_reservant;
+
 	private Date date_reservation;
-	@Column
+
 	private String status;
-	@Column
+
 	private int prix_total;
 
-	
-	
-
+	private String vol_reserve;
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.inventaire.Inventaire_Vols.entities.Reservation;
-
+/*
 @Service
 public class PassagerService {
 
@@ -38,7 +38,8 @@ public class PassagerService {
         existingReservation.setPrix_total(updatedReservation.getPrix_total());
 
     	
-        return reservationRepository.save(existingReservation);   
+   //     return reservationRepository.save(existingReservation);
         }
 
 }
+*/

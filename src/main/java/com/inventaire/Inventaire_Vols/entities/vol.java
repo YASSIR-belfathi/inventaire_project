@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,5 +26,11 @@ public class vol {
 	private String aeroport_depart;
 	@Column
 	private String aeroport_arrive;
+	@OneToMany(mappedBy = "vol")
+	private List<Reservation> reservations =new ArrayList<>();
+	@OneToOne
+	private Avion avion;
+	@OneToMany(mappedBy = "vol",fetch = FetchType.LAZY)
+	private List<Membre_equipage> membreEquipages=new ArrayList<>();
 	
 }

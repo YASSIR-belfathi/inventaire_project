@@ -27,6 +27,9 @@ public class Membre_equipage {
 	private String nationalite;
 	@Column
 	private Option option;
+	@ManyToOne()
+	@JoinColumn(name = "volId")
+	private vol vol;
 	
 	
 	
