@@ -10,21 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@DiscriminatorValue("US")
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@Data
 public class Passager extends User {
-	@Column
+
 	private int numPasseport;
-	@Column
+
 	private String numID;
-	@Column
+
 	private String nationalite;
-	@Column
+
 	private String adresse;
-	@Column
-	private int telephone;
+
+	private String telephone;
 	@OneToMany(mappedBy = "passager",fetch = FetchType.LAZY)
 	private List<Reservation> reservations =new ArrayList<>();
+
+
 }

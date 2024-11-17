@@ -17,7 +17,7 @@ public class Role {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
     private String Name;
-    @ManyToMany(mappedBy = "Roles",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER)
     @ToString.Exclude
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<User> users;

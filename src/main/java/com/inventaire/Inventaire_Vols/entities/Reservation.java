@@ -15,16 +15,17 @@ public class Reservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	@ManyToOne
-	@JoinColumn(name = "passager_id")
-	private Passager passager_reservant;
+	@JoinColumn(name = "passagerId")
 
-	private Date date_reservation;
+	private Passager passager;
 
-	private String status;
+	private Date dateReservation;
 
-	private int prix_total;
+	private StatutReservation statutReservation;
 
-	private String vol_reserve;
+	private int prixTotal;
+	@ManyToOne()
+	@JoinColumn(name = "volID")
+	private Vol vol;
 }

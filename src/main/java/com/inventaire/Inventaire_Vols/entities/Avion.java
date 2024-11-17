@@ -1,4 +1,5 @@
 package com.inventaire.Inventaire_Vols.entities;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,20 +12,24 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Avion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@Column
-	private String type_avion;
-    @Column
-	private int capacite;
-    @Column
-	private Date annee_fabrication;
-    @Column
-	private String model;
-    @ManyToMany(mappedBy = "avions")
+
+    private String type_avion;
+    private int capacite;
+    private Date annee_fabrication;
+    private String model;
+
+    @ManyToMany
+    @JoinTable(
+            name = "aeoroportAvion",
+            joinColumns = @JoinColumn(name = "avionId"),
+            inverseJoinColumns = @JoinColumn(name = "aeoroportId")
+    )
     private List<Aeoroport> aeoroports;
-    
+
+    @OneToOne
+    private Vol vol;
 }

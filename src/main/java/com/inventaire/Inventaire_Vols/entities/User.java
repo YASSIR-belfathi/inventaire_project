@@ -14,7 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE")
+@Table(name = "appUser")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +25,5 @@ public class User {
 	private String password;
 	private String nomComplet;
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Role> Roles = new ArrayList<>();
+	private List<Role> roles = new ArrayList<>();
 }

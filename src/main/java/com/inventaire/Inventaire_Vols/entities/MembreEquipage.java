@@ -8,28 +8,24 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Membre_equipage {
-	public enum Option{
-		Membre_nomal,
-		pilote,
-		copilote
-	}
+public class MembreEquipage {
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	@Column
+
 	private String nom_complet;
-	@Column
+
 	private String fonction;
-	@Column
+
 	private String num_licence;
-	@Column
+
 	private String nationalite;
-	@Column
-	private Option option;
 	@ManyToOne()
 	@JoinColumn(name = "volId")
-	private vol vol;
+	private Vol vol;
+	@OneToOne
+	private Role role;
 	
 	
 	
