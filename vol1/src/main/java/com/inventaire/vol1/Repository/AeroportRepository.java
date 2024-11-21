@@ -3,7 +3,9 @@
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.inventaire.vol1.entity.Aeroport;
+
 @Repository
-public interface Reservation extends JpaRepository<Reservation, Integer>{
+public interface AeroportRepository extends JpaRepository<Aeroport, Integer>{
     
 }

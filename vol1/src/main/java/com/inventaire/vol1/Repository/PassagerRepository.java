@@ -3,7 +3,9 @@
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.inventaire.vol1.entity.Passager;
+
 @Repository
-public interface Utilisateur extends JpaRepository<Utilisateur, Integer>{
+public interface PassagerRepository extends JpaRepository<Passager, Integer>{
     
 }

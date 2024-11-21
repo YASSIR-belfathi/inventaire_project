@@ -6,10 +6,10 @@ import jakarta.persistence.*;
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Utilisateur {
-    private enum Type_user{
-        utilisateur,
-        administrateur
-    };
+    // private enum Type_user{
+    //     utilisateur,
+    //     administrateur
+    // };
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
@@ -18,16 +18,16 @@ public class Utilisateur {
     @Column
     private String password;
     @Column
-    private String telephone;
+    private int telephone;
     @Column
     private String nom_complet;
     @Column
-    private Type_user type_user;
+    private String type_user;
     
     public Utilisateur() {
     }
 
-    public Utilisateur(String email, String password, String telephone, String nom_complet) {
+    public Utilisateur(String email, String password, int telephone, String nom_complet) {
         this.email = email;
         this.password = password;
         this.telephone = telephone;
@@ -53,10 +53,10 @@ public class Utilisateur {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getTelephone() {
-        return telephone;
+    public int getTelephone() {
+        return this.telephone;
     }
-    public void setTelephone(String telephone) {
+    public void setTelephone(int telephone) {
         this.telephone = telephone;
     }
     public String getNom_complet() {
@@ -66,12 +66,12 @@ public class Utilisateur {
         this.nom_complet = nom_complet;
     }
 
-    public Type_user getType_user() {
+    public String getType_user() {
         return type_user;
     }
 
 
-    public void setType_user(Type_user type_user) {
+    public void setType_user(String type_user) {
         this.type_user = type_user;
     }
 
