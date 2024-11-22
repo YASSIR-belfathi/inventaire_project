@@ -28,7 +28,7 @@ public class Avion {
             joinColumns = @JoinColumn(name = "avionId"),
             inverseJoinColumns = @JoinColumn(name = "aeoroportId")
     )
-    private List<Aeoroport> aeoroports;
+    private List<Aeroport> aeoroports;
 
     @OneToOne
     private Vol vol;

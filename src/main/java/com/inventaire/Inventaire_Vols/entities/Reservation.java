@@ -17,13 +17,10 @@ public class Reservation {
 	private Long id;
 	@ManyToOne
 	@JoinColumn(name = "passagerId")
-
 	private Passager passager;
-
 	private Date dateReservation;
-
+	//@Enumerated(EnumType.STRING)
 	private StatutReservation statutReservation;
-
 	private int prixTotal;
 	@ManyToOne()
 	@JoinColumn(name = "volID")
