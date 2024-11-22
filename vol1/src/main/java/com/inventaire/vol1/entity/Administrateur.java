@@ -17,8 +17,8 @@ public class Administrateur extends Utilisateur{
         
     }
     public Administrateur(String email, String password, int telephone, String nom_complet, String poste_travail,
-            List<Vol> list_vol) {
-        super(email, password, telephone, nom_complet);
+            List<Vol> list_vol, String type_user) {
+        super(email, password, telephone, nom_complet, type_user);
         this.poste_travail = poste_travail;
         this.list_vol = list_vol;
     }
@@ -37,6 +37,7 @@ public class Administrateur extends Utilisateur{
     @Override
     public String toString() {
         return "Administrateur [poste_travail=" + this.poste_travail + ", list_vol=" + this.list_vol 
-        +", nom_complet="+this.getNom_complet()+", telephone="+this.getTelephone()+", email="+this.getEmail()+ "]";
+        +", nom_complet="+this.getNom_complet()+", telephone="+this.getTelephone()+", email="+this.getEmail()
+        +", type_user="+this.getType_user()+ "]";
     }
 }

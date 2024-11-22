@@ -21,19 +21,4 @@ public class UtilisateurService {
     {
         return utilisateurRepository.findAll();
     }
-
-    public void addNewUtilisateur(Utilisateur utilisateur)
-    {
-        Optional<Utilisateur> utilisateurOption=utilisateurRepository.findUtilisateurByNom(utilisateur.getNom_complet());
-
-        if(utilisateurOption.isPresent())
-        {
-            throw new IllegalStateException("this user exists");
-        }
-        else{
-            System.out.println(utilisateur);
-        }
-
-        utilisateurRepository.save(utilisateur);
-    }
 }
