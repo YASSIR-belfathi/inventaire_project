@@ -1,10 +1,10 @@
-﻿POST http://localhost:8080/inventaire/utilisateur/create
+﻿POST http://localhost:8080/inventaire/createAdmin
 Content-Type: application/json
 
 {
     "email":"belfathiy@gmail.com",
     "password":"18346",
     "telephone":"023569",
-    "type_user":"utilisateur",
-    "nom_complet":"yassir belfathi"
+    "nom_complet":"yassir belfathi",
+    "poste_travail":"informatique"
 }

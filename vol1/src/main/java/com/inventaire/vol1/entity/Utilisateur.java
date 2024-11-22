@@ -21,8 +21,6 @@ public class Utilisateur {
     private int telephone;
     @Column
     private String nom_complet;
-    @Column
-    private String type_user;
     
     public Utilisateur() {
     }
@@ -66,20 +64,11 @@ public class Utilisateur {
         this.nom_complet = nom_complet;
     }
 
-    public String getType_user() {
-        return type_user;
-    }
-
-
-    public void setType_user(String type_user) {
-        this.type_user = type_user;
-    }
-
 
     @Override
     public String toString() {
         return "utilisateur [ID=" + this.ID + ", email=" + this.email + ", password=" + this.password + ", telephone=" + this.telephone
-                + ", nom_complet=" + this.nom_complet + ", type_user=" + this.type_user + "]";
+                + ", nom_complet=" + this.nom_complet + "]";
     }
 
     

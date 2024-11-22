@@ -36,6 +36,7 @@ public class Administrateur extends Utilisateur{
     }
     @Override
     public String toString() {
-        return "Administrateur [poste_travail=" + this.poste_travail + ", list_vol=" + this.list_vol + "]";
+        return "Administrateur [poste_travail=" + this.poste_travail + ", list_vol=" + this.list_vol 
+        +", nom_complet="+this.getNom_complet()+", telephone="+this.getTelephone()+", email="+this.getEmail()+ "]";
     }
 }
