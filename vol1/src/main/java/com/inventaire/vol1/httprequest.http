@@ -13,4 +13,19 @@ Content-Type: application/json
 #ici on peut simplement changer l'id 44 par celui qui existe dans la table administrateur
 #ou ce lui qui existe dans la table utilisateur, mais vous devez d'abord ajouter les informations
 #avant de les supprimer
-DELETE http://localhost:8080/inventaire/deleteAdmin/44
+DELETE http://localhost:8080/inventaire/deleteAdmin/45
+
+POST http://localhost:8080/inventaire/createPassager
+Content-Type: application/json
+
+{
+    "nom_complet":"yassir belfathi",
+    "num_passport":"125BHI78",
+    "num_carte_identifie":"1253",
+    "nationnalite":"marocain",
+    "telephone":"025356"
+}
+
+#ici aussi on doit mettre à la place de 1 l'id de l'élèment qu'on veut exactement
+#supprimé de la table passager.
+DELETE http://localhost:8080/inventaire/deletePassager/1

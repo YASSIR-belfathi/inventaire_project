@@ -3,16 +3,21 @@
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inventaire.vol1.entity.Reservation;
+import com.inventaire.vol1.entity.Passager;
+// import com.inventaire.vol1.entity.Reservation;
 import com.inventaire.vol1.services.PassagerService;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping(path="inventaire/vol")
+@RequestMapping(path="inventaire")
 public class PassagerController {
     private final PassagerService passagerService;
 
@@ -21,9 +26,20 @@ public class PassagerController {
         this.passagerService=passagerService;
     }
 
-    @GetMapping
-    public List<Reservation> getMethodName() {
-        return passagerService.getReservation();
+    @GetMapping("passager")
+    public List<Passager> listPassagers(){
+        return passagerService.listPassager();
     }
-    
+
+    @PostMapping(path = "createPassager")
+    public void addPassager(@RequestBody Passager passager)
+    {
+        passagerService.addPassager(passager);
+    }
+
+    @DeleteMapping(path = "deletePassager/{PassagerId}")
+    public void deletePassager(@PathVariable("PassagerId") int Id)
+    {
+        passagerService.deletePassager(Id);
+    }
 }

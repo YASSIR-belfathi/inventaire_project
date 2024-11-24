@@ -7,31 +7,31 @@ import jakarta.persistence.*;
 public class Membre_equipage {
 
     //attributs for class(Entity)
-    private enum type_membre{
-        Membre_normal,
-        Copilot,
-        Pilot
-    };
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID_membre_equipage;
     @Column
     private String nom_complet;
+    /* 
+     * le type du membre peut être soit {membre, copilot, pilot}
+     * l'obligation d'ajouter au moins un copilot ou un pilot on peut la faire
+     * dans la partie de la création d'un objet de cette classe.
+     */
     @Column
-    private type_membre Type_membre;
+    private String Type_membre;
     @Column
     private String nationnalite;
     @Column
     private String num_licence;
     @ManyToOne
-    @JoinColumn(name = "id_vol", nullable = false)
+    @JoinColumn(name = "id_vol")
     private Vol vol;
 
     //Constructor
     public Membre_equipage() {
     }
 
-    public Membre_equipage(String nom_complet, type_membre Type_membre, String nationnalite, String num_licence) {
+    public Membre_equipage(String nom_complet, String Type_membre, String nationnalite, String num_licence) {
         this.nom_complet = nom_complet;
         this.Type_membre = Type_membre;
         this.nationnalite = nationnalite;
@@ -51,10 +51,10 @@ public class Membre_equipage {
     public void setNom_complet(String nom_complet) {
         this.nom_complet = nom_complet;
     }
-    public type_membre getType_membre() {
+    public String getType_membre() {
         return Type_membre;
     }
-    public void setType_membre(type_membre Type_membre) {
+    public void setType_membre(String Type_membre) {
         this.Type_membre = Type_membre;
     }
     public String getNationnalite() {

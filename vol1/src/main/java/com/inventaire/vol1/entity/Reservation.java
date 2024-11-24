@@ -10,11 +10,6 @@ import jakarta.persistence.*;
 public class Reservation {
 
     //attributs of class
-    private enum Status{
-        en_cours,
-        finie,
-        // d'autres suggestions à ajouter
-    }
     @Id
     @GeneratedValue
     private int ID_reservation;
@@ -22,8 +17,13 @@ public class Reservation {
     private List<Passager> list_passager;
     @Column
     private LocalDate date_reservation;
+
+    /* 
+     * les réservations peut être de String{en cours, finie, new, ou d'autres}.
+     * la valeur par défaut sera "nouveau"
+     */
     @Column
-    private Status statu_reservation;
+    private String statu_reservation="nouveau";
     @Column
     private Double prix;
     @ManyToOne(cascade = CascadeType.ALL)
@@ -33,7 +33,7 @@ public class Reservation {
     //Constructor of class
     public Reservation() {
     }
-    public Reservation(LocalDate date_reservation, Status statu_reservation, Double prix,
+    public Reservation(LocalDate date_reservation, String statu_reservation, Double prix,
     List<Passager> list_passager, Vol vol ) {
         this.list_passager = list_passager;
         this.date_reservation = date_reservation;
@@ -61,10 +61,10 @@ public class Reservation {
     public void setDate_reservation(LocalDate date_reservation) {
         this.date_reservation = date_reservation;
     }
-    public Status getStatu_reservation() {
+    public String getStatu_reservation() {
         return statu_reservation;
     }
-    public void setStatu_reservation(Status statu_reservation) {
+    public void setStatu_reservation(String statu_reservation) {
         this.statu_reservation = statu_reservation;
     }
     public Double getPrix() {

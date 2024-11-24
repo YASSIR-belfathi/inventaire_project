@@ -28,13 +28,12 @@ public class Passager{
     }
 
     public Passager(String nom_complet, String num_passport, String num_carte_identifie, String nationnalite,
-            int telephone, List<Reservation> list_reservation) {
+            int telephone) {
         this.nom_complet = nom_complet;
         this.num_passport = num_passport;
         this.num_carte_identifie = num_carte_identifie;
         this.nationnalite = nationnalite;
         this.telephone = telephone;
-        this.list_reservation = list_reservation;
     }
 
     public String getNum_passport() {
@@ -56,17 +55,40 @@ public class Passager{
         this.nationnalite = nationnalite;
     }
 
+    public void ajoutReservation(Reservation reservation)
+    {
+        list_reservation.add(reservation);
+    }
+
+    public void suppressionReservation(Reservation reservation)
+    {
+        list_reservation.remove(reservation);
+    }
+
     
+
+    //on peut ajouter une autre méthode pour la recherche de la réservation.
+    
+    public String getNom_complet() {
+        return this.nom_complet;
+    }
+
+    public void setNom_complet(String nom_complet) {
+        this.nom_complet = nom_complet;
+    }
+
+    public int getTelephone() {
+        return this.telephone;
+    }
+
+    public void setTelephone(int telephone) {
+        this.telephone = telephone;
+    }
+
     @Override
     public String toString() {
         return "Passager [ID_passager=" + ", num_passport=" + this.num_passport + ", num_carte_identifie="
                 + this.num_carte_identifie + ", nationnalite=" + this.nationnalite +"list_reservation="+this.list_reservation +"]";
     }
-    public List<Reservation> getList_reservation() {
-        return list_reservation;
-    }
-    public void setList_reservation(List<Reservation> list_reservation) {
-        this.list_reservation = list_reservation;
-    }
-    
+
 }
