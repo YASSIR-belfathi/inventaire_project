@@ -11,14 +11,18 @@ public class Avion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID_avion;
-    @Column
-    private String type;
+    // @Column
+    // private String type;
     @Column
     private int capacity;
     @Column
     private int year_manufacture;
     @Column
     private String model;
+
+    //l'immatriculation sera un numéro unique pour chaque avion
+    @Column
+    private String immatriculation;
     @ManyToOne
     @JoinColumn(name = "id_aeroport", nullable = false)
     private Aeroport aeroport;
@@ -28,12 +32,14 @@ public class Avion {
 
     public Avion() {
     }
-    public Avion(int ID_avion, String type, int capacity, int year_manufacture, String model) {
+    public Avion(int ID_avion, int capacity, int year_manufacture, String model,
+    String immatriculation) {
         this.ID_avion = ID_avion;
-        this.type = type;
+        // this.type = type;
         this.capacity = capacity;
         this.year_manufacture = year_manufacture;
         this.model = model;
+        this.immatriculation=immatriculation;
     }
     public int getID_avion() {
         return ID_avion;
@@ -41,12 +47,12 @@ public class Avion {
     public void setID_avion(int ID_avion) {
         this.ID_avion = ID_avion;
     }
-    public String getType() {
-        return type;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
+    // public String getType() {
+    //     return type;
+    // }
+    // public void setType(String type) {
+    //     this.type = type;
+    // }
     public int getCapacity() {
         return capacity;
     }
@@ -65,9 +71,24 @@ public class Avion {
     public void setModel(String model) {
         this.model = model;
     }
+
+    
+    public String getImmatriculation() {
+        return immatriculation;
+    }
+    public void setImmatriculation(String immatriculation) {
+        this.immatriculation = immatriculation;
+    }
+    public Aeroport getAeroport() {
+        return aeroport;
+    }
+    public void setAeroport(Aeroport aeroport) {
+        this.aeroport = aeroport;
+    }
+
     @Override
     public String toString() {
-        return "Avion [ID_avion=" + this.ID_avion + ", type=" + this.type + ", capacity=" + this.capacity + ", year_manufacture="
+        return "Avion [ID_avion=" + this.ID_avion + ", capacity=" + this.capacity + ", year_manufacture="
                 + this.year_manufacture + ", model=" + this.model + "]";
     }
 }

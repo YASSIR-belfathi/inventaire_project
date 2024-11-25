@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inventaire.vol1.entity.Administrateur;
+import com.inventaire.vol1.entity.Aeroport;
+import com.inventaire.vol1.entity.Avion;
 import com.inventaire.vol1.entity.Utilisateur;
 import com.inventaire.vol1.services.AdministrateurService;
+import com.inventaire.vol1.services.AeroportService;
+import com.inventaire.vol1.services.AvionService;
 import com.inventaire.vol1.services.UtilisateurService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,12 +26,17 @@ public class AdministrateurControlleur {
     
     private final UtilisateurService utilisateurService;
     private final AdministrateurService administrateurService;
+    private final AeroportService aeroportService;
+    private final AvionService avionService;
 
     public AdministrateurControlleur(UtilisateurService utilisateurService,
-    AdministrateurService administrateurService)
+    AdministrateurService administrateurService, AeroportService aeroportService,
+    AvionService avionService)
     {
         this.administrateurService=administrateurService;
         this.utilisateurService=utilisateurService;
+        this.aeroportService=aeroportService;
+        this.avionService=avionService;
     }
 
     /* 
@@ -50,8 +59,19 @@ public class AdministrateurControlleur {
         return administrateurService.getListAdmin();
     }
 
+    @GetMapping(path="Aeroport")
+    public List<Aeroport> getListAeroport(){
+        return aeroportService.listAeroport();
+    }
+
+    @GetMapping(path="Avion")
+    public List<Avion> getListAvion()
+    {
+        return avionService.listAvion();
+    }
+
     /* 
-     * cette méthode va permettre créer un utilisateur à partir un fichier json qui
+     * cette méthode va permettre créer un utilisateur à partir d'un fichier json qui
      * sera envoyé par le client et qui va contenir l'ensemble des informations
      * nécessaires pour la création des nouveaux utilisateurs.
      */
@@ -61,14 +81,38 @@ public class AdministrateurControlleur {
         administrateurService.addAdmin(administrateur);
     }
 
+    @PostMapping(path="createAeroport")
+    public void addAeroport(@RequestBody Aeroport aeroport)
+    {
+        aeroportService.addAeroport(aeroport);
+    }
+
+
+    @PostMapping(path="createAvion")
+    public void addAvion(@RequestBody Avion avion)
+    {
+        avionService.addAvion(avion);
+    }
 
     /* 
-     * cette méthode nous permet un administrateur de la table Administrateur et
+     * cette méthode nous permet de supprimer un administrateur de la table Administrateur et
      * de sa référence dans la table utilisateur
      */
     @DeleteMapping(path="deleteAdmin/{AdminId}")
     public void deleteAdmin(@PathVariable("AdminId") int Id)
     {
         administrateurService.deleteAdmin(Id);
+    }
+
+    @DeleteMapping(path="deleteAeroport/{AeroportName}")
+    public void deleteAeroport(@PathVariable("AeroportName") String name)
+    {
+        aeroportService.deleteAeroport(name);
+    }
+
+    @DeleteMapping(path="deleteAvion/{Immatriculation}")
+    public void deleteAvion(@PathVariable("Immatriculation") String Immatriculation)
+    {
+        avionService.deleteAvion(Immatriculation);
     }
 }

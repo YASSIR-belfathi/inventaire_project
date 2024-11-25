@@ -1,4 +1,5 @@
-﻿POST http://localhost:8080/inventaire/createAdmin
+﻿//la partie admin
+POST http://localhost:8080/inventaire/createAdmin
 Content-Type: application/json
 
 {
@@ -15,6 +16,8 @@ Content-Type: application/json
 #avant de les supprimer
 DELETE http://localhost:8080/inventaire/deleteAdmin/45
 
+
+//la partie passager
 POST http://localhost:8080/inventaire/createPassager
 Content-Type: application/json
 
@@ -29,3 +32,19 @@ Content-Type: application/json
 #ici aussi on doit mettre à la place de 1 l'id de l'élèment qu'on veut exactement
 #supprimé de la table passager.
 DELETE http://localhost:8080/inventaire/deletePassager/1
+
+
+//la partie aeroport
+
+POST http://localhost:8080/inventaire/createAeroport
+Content-Type: application/json
+
+{
+    "aeroport_IATA":"ATIAt",
+    "nom_aeroport":"Hassan-2",
+    "ville":"Casablanca",
+    "pays":"Maroc",
+    "capacite":"50000"
+}
+
+DELETE http://localhost:8080/inventaire/deleteAeroport/Hassan-2
