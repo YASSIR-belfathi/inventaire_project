@@ -1,48 +1,38 @@
 package services;
+import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import entities.Reservation;
-import repositories.*;
 
+import entities.Passager;
+import repositories.PassagerRepository;
 @Service
 public class PassagerService {
 
+@Autowired
+private PassagerRepository passagerRepository;
 
-    private ReservationRepository reservationRepository ;
+//liste passager
+public List<Passager> listPassager(){
+    return passagerRepository.findAll();
+}
 
-    @Autowired
-    public PassagerService(ReservationRepository reservationRepository){
-        this.reservationRepository = reservationRepository;
+
+//ajouer nouveau passager
+public Passager savePassager(Passager passager) {
+    return passagerRepository.save(passager);
+}
+//supprimer passager
+public void deletePassager(long Id){
+    Optional<Passager> passagerOptional=passagerRepository.findById(Id);
+
+    if(passagerOptional.isPresent()){
+        passagerRepository.deleteById(Id);
     }
 
-    @Transactional
-    public Reservation addReservation(Reservation reservation) {
-        return reservationRepository.save(reservation);
-    }
-    
-    public void removeReservation(long id) {
-    	reservationRepository.deleteById(id);
-    }
-	
-    public Reservation updateReservation(long id, Reservation updatedReservation) {
-        Optional<Reservation> existingReservation = reservationRepository.findById(id);
-    	if(existingReservation.isPresent()) {
-            Reservation existingReservation1 = existingReservation.get();
-
-            existingReservation1.setVol_reserve(updatedReservation.getVol_reserve());
-            existingReservation1.setPassager_reservant(updatedReservation.getPassager_reservant());
-            existingReservation1.setDate_reservation(updatedReservation.getDate_reservation());
-            existingReservation1.setStatus(updatedReservation.getStatus());
-            existingReservation1.setPrix_total(updatedReservation.getPrix_total());
-            return reservationRepository.save(existingReservation1); 
-    	}else {
-    		throw new IllegalArgumentException("Reservation avec l'ID " + id + " non trouvée.");
-    	}
-		  
-        }
-
+    else{
+        throw new IllegalStateException("Aucun passager avec l'ID"+Id+"n'exist pas dans la base des donnees");
+    }  
+}
 }
