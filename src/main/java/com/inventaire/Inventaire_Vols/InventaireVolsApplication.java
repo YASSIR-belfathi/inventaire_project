@@ -1,9 +1,11 @@
 package com.inventaire.Inventaire_Vols;
 
+import com.inventaire.Inventaire_Vols.dto.PassagerDTO;
 import com.inventaire.Inventaire_Vols.entities.*;
 import com.inventaire.Inventaire_Vols.repositories.PassagerRepository;
 import com.inventaire.Inventaire_Vols.repositories.ReservationRepository;
 import com.inventaire.Inventaire_Vols.repositories.VolRepository;
+import com.inventaire.Inventaire_Vols.services.PassagerService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,14 +25,17 @@ public class InventaireVolsApplication {
 	@Bean
 	CommandLineRunner start(PassagerRepository passagerRepository,
 							VolRepository volRepository,
-							ReservationRepository reservationRepository) {
+							ReservationRepository reservationRepository,
+							PassagerService passagerservice) {
 		return args -> {
 			Stream.of("amin el bali", "karim mojid", "adil ramid", "jawad ghalib").forEach(name -> {
-				Passager passager = new Passager();
-				passager.setNomComplet(name);
-				passager.setEmail(name + "@gmail.com");
-				passager.setNationalite("marocaine");
-				//passagerRepository.save(passager);  // Décommenté pour sauvegarder en base
+				PassagerDTO passager = new PassagerDTO();
+				passager.setNationalite("algerien");
+				passager.setNumPasseport(23);
+				passager.setNumID("12345");
+				passager.setTelephone("0612345678");
+				passager.setAdresse("lot sanabel");
+				//passagerservice.savePassager(passager);  // Décommenté pour sauvegarder en base
 			});
 
 			passagerRepository.findAll().forEach(passager -> {
