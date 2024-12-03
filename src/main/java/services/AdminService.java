@@ -45,7 +45,6 @@ public class AdminService {
             existingMembre_equipage1.setNum_licence(updatedMembre_equipage.getNum_licence());
             existingMembre_equipage1.setFonction(updatedMembre_equipage.getFonction());
             existingMembre_equipage1.setNationalite(updatedMembre_equipage.getNationalite());
-            existingMembre_equipage1.setOption(updatedMembre_equipage.getOption());
             return membre_equipageRepository.save(existingMembre_equipage1); 
     	}else {
     		throw new IllegalArgumentException("Membre d'equipage avec l'ID " + id + " non trouvée.");

@@ -3,11 +3,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class Membre_equipage {
-	public enum Option{
-		Membre_nomal,
-		pilote,
-		copilote
-	}
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,14 +15,11 @@ public class Membre_equipage {
 	private String num_licence;
 	@Column
 	private String nationalite;
-	@Column
-	private Option option;
-	public Membre_equipage(String nom_complet, String fonction, String num_licence, String nationalite, Option option) {
+	public Membre_equipage(String nom_complet, String fonction, String num_licence, String nationalite) {
 		this.nom_complet = nom_complet;
 		this.fonction = fonction;
 		this.num_licence = num_licence;
 		this.nationalite = nationalite;
-		this.option = option;
 	}
 	public String getNom_complet() {
 		return nom_complet;
@@ -52,12 +45,7 @@ public class Membre_equipage {
 	public void setNationalite(String nationalite) {
 		this.nationalite = nationalite;
 	}
-	public Option getOption() {
-		return option;
-	}
-	public void setOption(Option option) {
-		this.option = option;
-	}
+	
 	
 	
 	

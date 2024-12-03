@@ -21,12 +21,14 @@ public class User {
     @Column
     private String password;
     @Column
-    private String nom_complet;
-    public User(String email,String password,String nom_complet){
+    private String username;
+    public User(String email,String password,String username){
     	this.email = email;
     	this.password = password;
-    	this.nom_complet = nom_complet;
+    	this.username = username;
     }
+    @Column 
+    private String Role;
     public User() {}
 	public String getEmail() {
 		return email;
@@ -40,11 +42,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getNom_complet() {
-		return nom_complet;
+	public String getusername() {
+		return username;
 	}
-	public void setNom_complet(String nom_complet) {
-		this.nom_complet = nom_complet;
+	public void setusername(String username) {
+		this.username = username;
+	}
+	public String getRole() {
+		return Role;
+	}
+	public String setRole(String Role) {
+		return this.Role=Role;
+	}
+	public User orElseThrow(Object object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
     
 
