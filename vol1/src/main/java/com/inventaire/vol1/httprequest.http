@@ -1,4 +1,4 @@
-﻿//la partie admin
+﻿# //la partie admin
 POST http://localhost:8080/inventaire/createAdmin
 Content-Type: application/json
 
@@ -11,13 +11,21 @@ Content-Type: application/json
     "type_user":"administrateur"
 }
 
+###
+PUT http://localhost:8080/inventaire/updateAdmin/47?telephone=0689527405
+
+
+
 #ici on peut simplement changer l'id 44 par celui qui existe dans la table administrateur
 #ou ce lui qui existe dans la table utilisateur, mais vous devez d'abord ajouter les informations
 #avant de les supprimer
+
+###
 DELETE http://localhost:8080/inventaire/deleteAdmin/45
 
 
 //la partie passager
+###
 POST http://localhost:8080/inventaire/createPassager
 Content-Type: application/json
 
@@ -31,11 +39,17 @@ Content-Type: application/json
 
 #ici aussi on doit mettre à la place de 1 l'id de l'élèment qu'on veut exactement
 #supprimé de la table passager.
+###
 DELETE http://localhost:8080/inventaire/deletePassager/1
+
+
+###
+PUT http://localhost:8080/inventaire/updatePassager/2?name=alpha
 
 
 //la partie aeroport
 
+###
 POST http://localhost:8080/inventaire/createAeroport
 Content-Type: application/json
 
@@ -47,4 +61,47 @@ Content-Type: application/json
     "capacite":"50000"
 }
 
-DELETE http://localhost:8080/inventaire/deleteAeroport/Hassan-2
+###
+DELETE http://localhost:8080/inventaire/deleteAeroport/Hassan-3
+
+###
+PUT http://localhost:8080/inventaire/updateAeroport/3?name=Hassan-3
+
+
+//partie avion
+###
+POST http://localhost:8080/inventaire/createAvion
+Content-Type: application/json
+
+{
+    "capacity":"4",
+    "year_manufacture":"2004",
+    "model":"A380",
+    "immatriculation":"R18964A"
+}
+
+###
+DELETE http://localhost:8080/inventaire/deleteAvion/R18964A
+
+###
+PUT http://localhost:8080/inventaire/updateAvion/4?capacity=9
+
+
+//partie membre équipage
+
+###
+POST http://localhost:8080/inventaire/createMember
+Content-Type: application/json
+
+{
+    "nom_complet":"yassir belfathi",
+    "Type_membre":"pilot",
+    "nationnalite":"marocain",
+    "num_licence":"18346"
+}
+
+###
+DELETE http://localhost:8080/inventaire/deleteMember/1
+
+###
+PUT http://localhost:8080/inventaire/updateMember/2?name=alpha
