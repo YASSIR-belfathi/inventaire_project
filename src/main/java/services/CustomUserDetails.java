@@ -1,35 +1,66 @@
 package services;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import entities.RoleEntity;
 import entities.User;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
 
-    private final User user;
+    @Getter
+    private Long id;
+    private String username;
+    private String password;
+    private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(User user) {
-        this.user = user;
+    public CustomUserDetails(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
+    public static CustomUserDetails build(User user) {
+        List<GrantedAuthority> authorities =  new ArrayList<>();
+        for (RoleEntity role : user.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority(role.getName().toString()));
+        }
+        return new CustomUserDetails(
+                user.getId(),
+                user.getUsername(),
+                user.getPassword(),
+                authorities);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(user.getRole()));
+        return authorities;
     }
 
-    @Override
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getusername();
+        return username;
     }
 
     @Override

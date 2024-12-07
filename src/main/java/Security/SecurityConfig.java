@@ -3,45 +3,69 @@ package Security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import jakarta.servlet.Filter;
+import services.CustomUserDetailsService;
 
 
 @Configuration
+@EnableWebSecurity
+
 public class SecurityConfig {
+	
+	    private final JwtAuthEntryPoint unauthorizedHandler;
+	    private final CustomUserDetailsService userDetailsService;
+	    private final JwtAuthTokenFilter jwtAuthTokenFilter;
 
-    private UserDetailsService userDetailsService;
+	    public SecurityConfig(JwtAuthEntryPoint unauthorizedHandler, CustomUserDetailsService userDetailsService, JwtAuthTokenFilter jwtAuthTokenFilter) {
+	        this.unauthorizedHandler = unauthorizedHandler;
+	        this.userDetailsService = userDetailsService;
+	        this.jwtAuthTokenFilter = jwtAuthTokenFilter;
+	    }
 
-    public SecurityConfig(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+	    @Bean
+	    public PasswordEncoder passwordEncoder() {
+	        return new BCryptPasswordEncoder();
+	    }
 
-    // Configuration de la sécurité HTTP
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-                .requestMatchers("/login").permitAll()  // Autoriser l'accès aux ressources statiques
-                .anyRequest().authenticated()  // Exiger une authentification pour toutes les autres pages
-            .and()
-            .formLogin()
-                .loginPage("/login")  // Page de login personnalisée
-                .permitAll()
-            .and()
-            .httpBasic().disable();
-        return http.build();
-    }
+	    @Bean
+	    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	        return authenticationConfiguration.getAuthenticationManager();
+	    }
 
-    // Configuration de l'AuthenticationManager
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(userDetailsService)  // Utilisation du CustomUserDetailsService
-                .and()
-                .build();
-    }
+	    @Bean
+	    public DaoAuthenticationProvider authenticationProvider() {
+	        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+	        authProvider.setUserDetailsService(userDetailsService);
+	        authProvider.setPasswordEncoder(passwordEncoder());
+	        return authProvider;
+	    }
 
-    
+	    @Bean
+	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	        http.csrf(csrf -> csrf.disable())
+	                .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(unauthorizedHandler))
+	                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+	                .authorizeHttpRequests(authorize -> authorize
+	                        .requestMatchers("/api/auth/login").permitAll()
+	                        .requestMatchers("/api/auth/signup").permitAll()
+
+
+	                        .anyRequest().authenticated()
+	                );
+
+	        http.authenticationProvider(authenticationProvider());
+	        http.addFilterBefore((Filter) jwtAuthTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+	        return http.build();
+	    }
 }

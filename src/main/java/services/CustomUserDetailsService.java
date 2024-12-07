@@ -1,10 +1,11 @@
 package services;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import entities.User;
 import repositories.UserRepository;
 
@@ -15,16 +16,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);  
-        if (user == null) {
-            throw new UsernameNotFoundException("Utilisateur non trouvé : " + username);
-        }
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getusername())
-                .password(user.getPassword())
-                .build(); 
-        }
-
+        return CustomUserDetails.build(user);
+    }
 }

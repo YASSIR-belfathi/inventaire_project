@@ -1,37 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
-    <script>
-        async function login(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            const response = await fetch('/authenticate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                alert('Login successful! Token: ' + data.token);
-                localStorage.setItem('jwt', data.token); // Stockage du token
-                window.location.href = '/home'; // Redirection après login
-            } else {
-                alert('Login failed!');
-            }
-        }
-    </script>
 </head>
 <body>
-    <h2>Login</h2>
-    <form onsubmit="login(event)">
+    <h2>Login Page</h2>
+    <form action="@{/api/auth/login}" method="post">
         <label for="username">Username:</label>
-        <input type="text" id="username" required><br><br>
+        <input type="text" id="username" name="username" required />
         <label for="password">Password:</label>
-        <input type="password" id="password" required><br><br>
+        <input type="password" id="password" name="password" required />
         <button type="submit">Login</button>
     </form>
 </body>
