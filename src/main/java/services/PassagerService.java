@@ -33,7 +33,6 @@ public class PassagerService {
     	if(existingReservation.isPresent()) {
             Reservation existingReservation1 = existingReservation.get();
 
-            existingReservation1.setVol_reserve(updatedReservation.getVol_reserve());
             existingReservation1.setPassager_reservant(updatedReservation.getPassager_reservant());
             existingReservation1.setDate_reservation(updatedReservation.getDate_reservation());
             existingReservation1.setStatus(updatedReservation.getStatus());

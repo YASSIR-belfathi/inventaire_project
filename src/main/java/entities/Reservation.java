@@ -1,6 +1,6 @@
 package entities;
 import jakarta.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class Reservation {
@@ -17,6 +17,7 @@ public class Reservation {
 	private String status;
 	@Column
 	private int prix_total;
+	public Reservation() {};
 	public Reservation(String vol_reserve, String passager_reservant, Date date_reservation, String status,
 			int prix_total) {
 		this.vol_reserve = vol_reserve;
@@ -25,12 +26,7 @@ public class Reservation {
 		this.status = status;
 		this.prix_total = prix_total;
 	}
-	public String getVol_reserve() {
-		return vol_reserve;
-	}
-	public void setVol_reserve(String vol_reserve) {
-		this.vol_reserve = vol_reserve;
-	}
+	
 	public String getPassager_reservant() {
 		return passager_reservant;
 	}
@@ -40,8 +36,8 @@ public class Reservation {
 	public Date getDate_reservation() {
 		return date_reservation;
 	}
-	public void setDate_reservation(Date date_reservation) {
-		this.date_reservation = date_reservation;
+	public void setDate_reservation(Date date) {
+		this.date_reservation = date;
 	}
 	public String getStatus() {
 		return status;
@@ -54,6 +50,32 @@ public class Reservation {
 	}
 	public void setPrix_total(int prix_total) {
 		this.prix_total = prix_total;
+	}
+
+    @ManyToOne
+    @JoinColumn(name = "vol_id", nullable = false)
+    private vol vol;
+
+    @ManyToOne
+    @JoinColumn(name = "passager_id", nullable = false)
+    private Passager passager;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public vol getVol() {
+		return vol;
+	}
+	public void setVol(vol vol) {
+		this.vol = vol;
+	}
+	public Passager getPassager() {
+		return passager;
+	}
+	public void setPassager(Passager passager) {
+		this.passager = passager;
 	}
 	
 	

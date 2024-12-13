@@ -1,7 +1,7 @@
 package controllers;
-
-
 import Security.JwtUtils;
+
+
 import entities.ERole;
 import entities.RoleEntity;
 import entities.User;
@@ -21,27 +21,23 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
 @ComponentScan
-@RestController
+@Controller
 @RequestMapping("/api/auth")
 public class AuthController {
-
     @Autowired
     AuthenticationManager authenticationManager;
-
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     RoleRepository roleRepository;
-
     @Autowired
     PasswordEncoder encoder;
-
     @Autowired
     JwtUtils jwtUtils;
     @GetMapping("/login")
@@ -60,7 +56,12 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();/**Reçoit une requête POST contenant les username et password.
+																					        Valide les informations d'identification via le AuthenticationManager.
+																					        Stocke les informations d'authentification dans le SecurityContext.
+																					        Génère un JWT pour l'utilisateur authentifié.
+																					        Récupère les détails de l'utilisateur (id, nom d'utilisateur, rôles).
+																					        Renvoie une réponse avec le token et les informations de l'utilisateur.**/
         Set<String> roles = new HashSet<>();
         userDetails.getAuthorities().forEach(authority -> roles.add(authority.getAuthority()));
 
@@ -97,10 +98,8 @@ public class AuthController {
                 }
             });
         }
-
         user.setRoles(roles);
         userRepository.save(user);
-
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }

@@ -33,8 +33,7 @@ public class User {
     	this.password = password;
     	this.username = username;
     }
-    @Column 
-    private String Role;
+  
     public User() {}
     
 	public Long getId() {
@@ -63,12 +62,7 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getRole() {
-		return Role;
-	}
-	public String setRole(String Role) {
-		return this.Role=Role;
-	}
+	
 	
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",

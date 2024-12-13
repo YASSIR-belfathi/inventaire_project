@@ -17,12 +17,22 @@ public class vol {
 	private String aeroport_depart;
 	@Column
 	private String aeroport_arrive;
-	public vol(int num_vol, String vol_IATA, Date date_vol, String aeroport_depart, String aeroport_arrive) {
+	@Column(nullable = false)
+	private int capacite;
+
+	@Column(nullable = false)
+	private int places_reservees = 0;
+
+	public vol() {}
+	public vol(int num_vol, String vol_IATA, Date date_vol, String aeroport_depart, String aeroport_arrive,int capacite,
+			int places_reservees) {
 		this.num_vol = num_vol;
 		this.vol_IATA = vol_IATA;
 		this.date_vol = date_vol;
 		this.aeroport_depart = aeroport_depart;
 		this.aeroport_arrive = aeroport_arrive;
+		this.capacite = capacite;
+		this.places_reservees = places_reservees;
 	}
 	public int getNum_vol() {
 		return num_vol;
@@ -53,6 +63,24 @@ public class vol {
 	}
 	public void setAeroport_arrive(String aeroport_arrive) {
 		this.aeroport_arrive = aeroport_arrive;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public int getCapacite() {
+		return capacite;
+	}
+	public void setCapacite(int capacite) {
+		this.capacite = capacite;
+	}
+	public int getPlaces_reservees() {
+		return places_reservees;
+	}
+	public void setPlaces_reservees(int places_reservees) {
+		this.places_reservees = places_reservees;
 	}
 	
 	

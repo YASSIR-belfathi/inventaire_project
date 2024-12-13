@@ -2,6 +2,7 @@ package Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -19,29 +20,24 @@ import services.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-
 public class SecurityConfig {
 	
 	    private final JwtAuthEntryPoint unauthorizedHandler;
 	    private final CustomUserDetailsService userDetailsService;
 	    private final JwtAuthTokenFilter jwtAuthTokenFilter;
-
 	    public SecurityConfig(JwtAuthEntryPoint unauthorizedHandler, CustomUserDetailsService userDetailsService, JwtAuthTokenFilter jwtAuthTokenFilter) {
 	        this.unauthorizedHandler = unauthorizedHandler;
 	        this.userDetailsService = userDetailsService;
 	        this.jwtAuthTokenFilter = jwtAuthTokenFilter;
 	    }
-
 	    @Bean
 	    public PasswordEncoder passwordEncoder() {
 	        return new BCryptPasswordEncoder();
 	    }
-
 	    @Bean
 	    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 	        return authenticationConfiguration.getAuthenticationManager();
 	    }
-
 	    @Bean
 	    public DaoAuthenticationProvider authenticationProvider() {
 	        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -49,7 +45,6 @@ public class SecurityConfig {
 	        authProvider.setPasswordEncoder(passwordEncoder());
 	        return authProvider;
 	    }
-
 	    @Bean
 	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	        http.csrf(csrf -> csrf.disable())
@@ -58,11 +53,12 @@ public class SecurityConfig {
 	                .authorizeHttpRequests(authorize -> authorize
 	                        .requestMatchers("/api/auth/login").permitAll()
 	                        .requestMatchers("/api/auth/signup").permitAll()
-
+	                        .requestMatchers("/search-flights").permitAll()
+	                        .requestMatchers("/reservations/create").permitAll()
+	                        .requestMatchers(HttpMethod.DELETE, "/reservations/cancel/**").permitAll()
 
 	                        .anyRequest().authenticated()
 	                );
-
 	        http.authenticationProvider(authenticationProvider());
 	        http.addFilterBefore((Filter) jwtAuthTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
