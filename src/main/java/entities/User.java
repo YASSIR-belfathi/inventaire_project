@@ -1,5 +1,4 @@
 package entities;
-
 import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.*;
@@ -27,11 +26,14 @@ public class User {
     @Column
     private String password;
     @Column
-    private String username;
-    public User(String email,String password,String username){
+    private String FirstName;
+    @Column
+    private String LastName;
+    public User(String email,String password,String FirstName,String LastName){
     	this.email = email;
     	this.password = password;
-    	this.username = username;
+    	this.FirstName = FirstName;
+    	this.LastName = LastName;
     }
   
     public User() {}
@@ -56,15 +58,26 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	
-	
-    @ManyToMany(fetch = FetchType.EAGER)
+    public String getFirstName() {
+		return FirstName;
+	}
+
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
+	}
+
+	public String getLastName() {
+		return LastName;
+	}
+
+	public void setLastName(String lastName) {
+		LastName = lastName;
+	}
+
+
+
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

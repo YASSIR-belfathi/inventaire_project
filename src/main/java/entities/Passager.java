@@ -1,39 +1,46 @@
 package entities;
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
 @Entity
 public class Passager extends User{
     @Column
-	private int num_passeport;
+	private int numPass;
     @Column
-	private String num_ID;
+	private String CIN;
     @Column
 	private String nationalite;
     @Column
 	private String adresse;
     @Column
 	private int telephone;
+    @Column
+    private LocalDate DateNaissance;
     
-    public Passager(String email, String password, String nom_complet,int num_passeport,String num_ID,String nationalite,String adresse,int telephone) {
-		super(email, password, nom_complet);
-		this.num_passeport = num_passeport;
-    	this.num_ID = num_ID;
-    	this.nationalite = nationalite ;
-    	this.adresse = adresse;
-    	this.telephone = telephone;
+	public Passager(String email, String password,  String FirstName, String LastName,
+			int numPass,String CIN,String nationalite,String adresse, int telephone,LocalDate DateNaissance) {
+		super(email, password, FirstName, LastName);
+		// TODO Auto-generated constructor stub
+		this.numPass = numPass;
+		this.CIN = CIN;
+		this.nationalite = nationalite;
+		this.adresse = adresse;
+		this.telephone = telephone;
+		this.DateNaissance =  DateNaissance;
 	}
 	public Passager() {}
-	public int getNum_passeport() {
-		return num_passeport;
+	public int getNumPass() {
+		return numPass;
 	}
-	public void setNum_passeport(int num_passeport) {
-		this.num_passeport = num_passeport;
+	public void setNumPass(int numPass) {
+		this.numPass = numPass;
 	}
-	public String getNum_ID() {
-		return num_ID;
+	public String getCIN() {
+		return CIN;
 	}
-	public void setNum_ID(String num_ID) {
-		this.num_ID = num_ID;
+	public void setCIN(String CIN) {
+		this.CIN = CIN;
 	}
 	public String getNationalite() {
 		return nationalite;
@@ -53,6 +60,10 @@ public class Passager extends User{
 	public void setTelephone(int telephone) {
 		this.telephone = telephone;
 	}
-    
-    
+	public LocalDate getDateNaissance() {
+		return DateNaissance;
+	}
+	public void setDateNaissance(LocalDate dateNaissance) {
+		this.DateNaissance = dateNaissance;
+	}
 }

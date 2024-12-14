@@ -3,6 +3,7 @@ import Security.JwtUtils;
 
 
 import entities.ERole;
+import entities.Passager;
 import entities.RoleEntity;
 import entities.User;
 import payload.request.LoginRequest;
@@ -51,11 +52,9 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();/**Reçoit une requête POST contenant les username et password.
 																					        Valide les informations d'identification via le AuthenticationManager.
 																					        Stocke les informations d'authentification dans le SecurityContext.
@@ -69,15 +68,22 @@ public class AuthController {
     }
    @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsername(signUpRequest.getFirstName(),signUpRequest.getLastName())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken"));
         }
 
         // Create new user's account
-	    User user = new User();
-        user.setUsername(signUpRequest.getUsername());
+	    Passager user = new Passager();
+        user.setFirstName(signUpRequest.getFirstName());
+        user.setLastName(signUpRequest.getLastName());
+        user.setNationalite(signUpRequest.getNationalite());
+        user.setDateNaissance(signUpRequest.getDateNaissance());
+        user.setCIN(signUpRequest.getCIN());
+        user.setNumPass(signUpRequest.getNumPass());
+        user.setTelephone(signUpRequest.getTelephone());
+        user.setEmail(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
-
+        
         Set<String> strRoles = signUpRequest.getRole();
         Set<RoleEntity> roles = new HashSet<>();
 
