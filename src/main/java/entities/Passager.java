@@ -1,11 +1,13 @@
 package entities;
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.*;
 
 @Entity
 public class Passager extends User{
-    @Column
+    
+	@Column
 	private int numPass;
     @Column
 	private String CIN;
@@ -65,5 +67,16 @@ public class Passager extends User{
 	}
 	public void setDateNaissance(LocalDate dateNaissance) {
 		this.DateNaissance = dateNaissance;
+	}
+	
+	//un passager peut avoir plusieurs reservations 
+    @OneToMany(mappedBy = "passager")
+    private List<Reservation> reservations;
+    
+    public List<Reservation> getReservations() {
+		return reservations;
+	}
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 }

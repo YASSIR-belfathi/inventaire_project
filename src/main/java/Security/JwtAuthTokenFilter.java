@@ -36,13 +36,13 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 // Extract the username from the JWT token
-                String username = jwtUtils.getUsernameFromJwtToken(jwt);
+                String Email = jwtUtils.getUsernameFromJwtToken(jwt);
 
                 // Extract the roles from the JWT token
                 List<String> roles = jwtUtils.getRolesFromJwtToken(jwt);
 
                 // Load user details based on username
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(Email);
 
                 // Map roles to authorities
                 List<GrantedAuthority> authorities = roles.stream()
@@ -64,8 +64,6 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-
-
 
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");

@@ -1,6 +1,8 @@
 package services;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +56,9 @@ public class ReservationService {
         volRepository.save(vol);
 
         reservationRepository.delete(reservation);
+    }
+    public List<Reservation> getHistoricalReservations(Long passengerId) {
+        Date today = new Date();
+        return reservationRepository.findReservationsHistory(passengerId, today);
     }
 }

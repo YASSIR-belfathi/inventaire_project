@@ -2,6 +2,8 @@ package entities;
 import jakarta.persistence.*;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Reservation {
 	@Id
@@ -56,9 +58,12 @@ public class Reservation {
     @JoinColumn(name = "vol_id", nullable = false)
     private vol vol;
 
+    //plusieurs reservations peut concerner un seul passager
     @ManyToOne
     @JoinColumn(name = "passager_id", nullable = false)
+    @JsonIgnore
     private Passager passager;
+    
 	public Long getId() {
 		return id;
 	}
@@ -77,7 +82,4 @@ public class Reservation {
 	public void setPassager(Passager passager) {
 		this.passager = passager;
 	}
-	
-	
-
 }
