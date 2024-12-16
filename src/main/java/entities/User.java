@@ -74,9 +74,6 @@ public class User {
 	public void setLastName(String lastName) {
 		LastName = lastName;
 	}
-
-
-
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

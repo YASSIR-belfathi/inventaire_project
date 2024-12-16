@@ -53,11 +53,9 @@ public class Reservation {
 	public void setPrix_total(int prix_total) {
 		this.prix_total = prix_total;
 	}
-
     @ManyToOne
     @JoinColumn(name = "vol_id", nullable = false)
     private vol vol;
-
     //plusieurs reservations peut concerner un seul passager
     @ManyToOne
     @JoinColumn(name = "passager_id", nullable = false)

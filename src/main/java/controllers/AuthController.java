@@ -1,13 +1,9 @@
 package controllers;
 import Security.JwtUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
-
-
 import entities.ERole;
 import entities.Passager;
 import entities.RoleEntity;
-import entities.User;
 import payload.request.LoginRequest;
 import payload.request.SignupRequest;
 import payload.response.JwtResponse;

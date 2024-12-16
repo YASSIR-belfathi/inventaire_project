@@ -12,7 +12,9 @@ import entities.vol;
 public interface VolRepository extends JpaRepository<vol, Long>{
 	@Query("SELECT v FROM vol v WHERE v.aeroport_depart = :aeroport_depart " +
 	           "AND v.aeroport_arrive = :aeroport_arrive " +
-	           "AND v.date_vol = :date_vol ")
+	           "AND v.date_vol_depart = :date_vol_depart " + 
+	           "AND v.date_vol_arrive = :date_vol_arrive "
+	           )
 	    List<vol> findvolByAirportsAndDate(
 	        String aeroport_depart, String aeroport_arrive, 
 	         Date date_vol);

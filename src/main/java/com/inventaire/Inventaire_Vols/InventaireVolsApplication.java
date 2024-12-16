@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.inventaire.Inventaire_Vols", "Security", "services","controllers"})
+@ComponentScan(basePackages = {"com.inventaire.Inventaire_Vols", "Security", "services","controllers","payload.request"})
 @EnableJpaRepositories("repositories")
 @EnableWebSecurity
 @EntityScan(basePackages = "entities")  

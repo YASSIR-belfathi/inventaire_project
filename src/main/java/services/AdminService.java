@@ -67,7 +67,10 @@ public class AdminService {
 
     		existingVol1.setAeroport_arrive(updatedVol.getAeroport_arrive());
     		existingVol1.setAeroport_depart(updatedVol.getAeroport_depart());
-    		existingVol1.setDate_vol(updatedVol.getDate_vol());
+    		existingVol1.setDate_vol_depart(updatedVol.getDate_vol_depart());
+    		existingVol1.setDate_vol_arrive(updatedVol.getDate_vol_arrive());
+    		existingVol1.setPrix_vol(updatedVol.getPrix_vol());
+
     		existingVol1.setNum_vol(updatedVol.getNum_vol());
     		existingVol1.setVol_IATA(updatedVol.getVol_IATA());
             return volRepository.save(existingVol1); 

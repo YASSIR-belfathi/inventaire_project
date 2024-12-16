@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import entities.vol;
+import payload.request.VolRequest;
 import repositories.VolRepository;
 @Component
 @Service
@@ -17,11 +18,21 @@ public class VolService {
 	public List<vol> searchVols(String aeroport_depart, String aeroport_arrive, 
 	         Date date_vol) {
 		return VolRepository.findvolByAirportsAndDate(aeroport_depart, aeroport_arrive, date_vol);
-}
-	 @Autowired
-
-	    public List<vol> getAllVols() {
-	        return VolRepository.findAll();
-	    }
+		}
+	@Autowired
+    public List<vol> getAllVols() {
+        return VolRepository.findAll();
+    }
+/*	@Autowired
+    public vol createFlight(VolRequest VolRequest) {
+        vol vol = new vol();
+        vol.setNum_vol(VolRequest.getNum_vol());
+        vol.setVol_IATA(VolRequest.getVol_IATA());
+        vol.setDate_vol(VolRequest.getDate_vol());
+        vol.setAeroport_depart(VolRequest.getAeroport_depart());
+        vol.setAeroport_arrive(VolRequest.getAeroport_arrive());
+        vol.setCapacite(VolRequest.getCapacite());
+        return VolRepository.save(vol);
+    }*/
 
 }
