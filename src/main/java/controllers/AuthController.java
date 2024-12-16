@@ -1,5 +1,7 @@
 package controllers;
 import Security.JwtUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 
 import entities.ERole;
@@ -30,6 +32,8 @@ import java.util.Set;
 @ComponentScan
 @Controller
 @RequestMapping("/api/auth")
+@CrossOrigin
+
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
