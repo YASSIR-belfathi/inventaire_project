@@ -18,5 +18,10 @@ public class VolService {
 	         Date date_vol) {
 		return VolRepository.findvolByAirportsAndDate(aeroport_depart, aeroport_arrive, date_vol);
 }
+	 @Autowired
+
+	    public List<vol> getAllVols() {
+	        return VolRepository.findAll();
+	    }
 
 }
