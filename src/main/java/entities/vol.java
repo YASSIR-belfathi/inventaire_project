@@ -28,12 +28,12 @@ public class vol {
 
 	public vol() {}
 	public vol(int num_vol, String vol_IATA, Date date_vol_depart,Date date_vol_arrive, String aeroport_depart, String aeroport_arrive,int capacite,
-			int places_reservees) {
+			int places_reservees, int prix_vol) {
 		this.num_vol = num_vol;
 		this.vol_IATA = vol_IATA;
 		this.date_vol_depart = date_vol_depart;
 		this.date_vol_arrive = date_vol_arrive;
-
+		this.prix_vol=prix_vol;
 		this.aeroport_depart = aeroport_depart;
 		this.aeroport_arrive = aeroport_arrive;
 		this.capacite = capacite;

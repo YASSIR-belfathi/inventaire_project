@@ -15,21 +15,35 @@ import payload.request.VolRequest;
 import java.util.List;
 
 import services.VolService;
-
 @RestController
 @RequestMapping("/api/vols")
 public class VolController {
     @Autowired
     private VolService volService;
 
-    @GetMapping
+    @GetMapping("/get-vols")
     public List<vol> getAllVols() {
         return volService.getAllVols();
     }
- /*   @PostMapping
-    public ResponseEntity<vol> createFlight(@RequestBody VolRequest volRequest) {
-        vol vol = volService.createFlight(volRequest);
+    @PostMapping("/add-vols")
+    public ResponseEntity<vol> createVols(@RequestBody VolRequest volRequest) {
+    	vol vol = volService.createVols(volRequest);
         return new ResponseEntity<>(vol, HttpStatus.CREATED);
-    }*/
+    }
 }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

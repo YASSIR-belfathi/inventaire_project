@@ -56,7 +56,8 @@ public class SecurityConfig {
 	                        .requestMatchers("/search-flights").permitAll()
 	                        .requestMatchers("/reservations/create").permitAll()
 	                        .requestMatchers("/api/passengers/**").permitAll()
-	                        .requestMatchers("/api/vols").permitAll()
+	                        .requestMatchers("/api/vols/get-vols").permitAll()
+	                        .requestMatchers("/api/vols/add-vols").permitAll()
 
 	                        
 	                        .requestMatchers(HttpMethod.DELETE, "/reservations/cancel/**").permitAll()

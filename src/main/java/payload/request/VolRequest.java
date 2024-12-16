@@ -2,12 +2,25 @@ package payload.request;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.NotBlank;
+
+
 public class VolRequest {
-  /*  private int num_vol;
+    @NotBlank
+    private int num_vol;
+    @NotBlank
     private String vol_IATA;
-    private Date date_vol;
-    private String aeroport_depart;
+    @NotBlank
+	private Date date_vol_depart;
+    @NotBlank
+	private Date date_vol_arrive;
+    @NotBlank
+	private int prix_vol;
+    @NotBlank
+	private String aeroport_depart;
+    @NotBlank
     private String aeroport_arrive;
+    @NotBlank
     private int capacite;
 	public int getNum_vol() {
 		return num_vol;
@@ -21,12 +34,7 @@ public class VolRequest {
 	public void setVol_IATA(String vol_IATA) {
 		this.vol_IATA = vol_IATA;
 	}
-	public Date getDate_vol() {
-		return date_vol;
-	}
-	public void setDate_vol(Date date_vol) {
-		this.date_vol = date_vol;
-	}
+	
 	public String getAeroport_depart() {
 		return aeroport_depart;
 	}
@@ -44,6 +52,23 @@ public class VolRequest {
 	}
 	public void setCapacite(int capacite) {
 		this.capacite = capacite;
-	}*/
-
+	}
+	public Date getDate_vol_depart() {
+		return date_vol_depart;
+	}
+	public void setDate_vol_depart(Date date_vol_depart) {
+		this.date_vol_depart = date_vol_depart;
+	}
+	public Date getDate_vol_arrive() {
+		return date_vol_arrive;
+	}
+	public void setDate_vol_arrive(Date date_vol_arrive) {
+		this.date_vol_arrive = date_vol_arrive;
+	}
+	public int getPrix_vol() {
+		return prix_vol;
+	}
+	public void setPrix_vol(int prix_vol) {
+		this.prix_vol = prix_vol;
+	}
 }

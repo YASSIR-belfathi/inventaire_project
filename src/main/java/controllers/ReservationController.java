@@ -12,11 +12,8 @@ import services.ReservationService;
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
-
     @Autowired
     private ReservationService reservationService;
-
-    
     @PostMapping("/create")
     public ResponseEntity<?> createReservation(@RequestBody ReservationRequest request) {
         try {
@@ -30,7 +27,6 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
     @DeleteMapping("/cancel/{reservationId}")
     public ResponseEntity<?> cancelReservation(@PathVariable Long reservationId) {
         try {
