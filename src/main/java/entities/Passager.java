@@ -8,39 +8,40 @@ import jakarta.persistence.*;
 public class Passager extends User{
     
 	@Column
-	private int numPass;
+	private int num_pass;
     @Column
-	private String CIN;
+	private String cin;
     @Column
 	private String nationalite;
 
     @Column
 	private int telephone;
     @Column
-    private LocalDate DateNaissance;
+    private LocalDate date_naissance;
     
 	public Passager(String email, String password,  String FirstName, String LastName,
 			int numPass,String CIN,String nationalite, int telephone,LocalDate DateNaissance) {
 		super(email, password, FirstName, LastName);
 		// TODO Auto-generated constructor stub
-		this.numPass = numPass;
-		this.CIN = CIN;
+		this.num_pass = numPass;
+		this.cin = CIN;
 		this.nationalite = nationalite;
 		this.telephone = telephone;
-		this.DateNaissance =  DateNaissance;
+		this.date_naissance =  DateNaissance;
 	}
 	public Passager() {}
-	public int getNumPass() {
-		return numPass;
+		
+	public int getNum_pass() {
+		return num_pass;
 	}
-	public void setNumPass(int numPass) {
-		this.numPass = numPass;
+	public void setNum_pass(int num_pass) {
+		this.num_pass = num_pass;
 	}
-	public String getCIN() {
-		return CIN;
+	public String getCin() {
+		return cin;
 	}
-	public void setCIN(String CIN) {
-		this.CIN = CIN;
+	public void setCin(String cin) {
+		this.cin = cin;
 	}
 	public String getNationalite() {
 		return nationalite;
@@ -48,20 +49,19 @@ public class Passager extends User{
 	public void setNationalite(String nationalite) {
 		this.nationalite = nationalite;
 	}
-	
 	public int getTelephone() {
 		return telephone;
 	}
 	public void setTelephone(int telephone) {
 		this.telephone = telephone;
 	}
-	public LocalDate getDateNaissance() {
-		return DateNaissance;
+	public LocalDate getDate_naissance() {
+		return date_naissance;
 	}
-	public void setDateNaissance(LocalDate dateNaissance) {
-		this.DateNaissance = dateNaissance;
+	public void setDate_naissance(LocalDate date_naissance) {
+		this.date_naissance = date_naissance;
 	}
-	
+
 	//un passager peut avoir plusieurs reservations 
     @OneToMany(mappedBy = "passager")
     private List<Reservation> reservations;

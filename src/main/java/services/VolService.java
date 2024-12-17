@@ -15,8 +15,8 @@ public class VolService {
 	@Autowired
     private VolRepository VolRepository;
 	public List<vol> searchVols(String aeroport_depart, String aeroport_arrive, 
-	         Date date_vol) {
-		return VolRepository.findvolByAirportsAndDate(aeroport_depart, aeroport_arrive, date_vol);
+			Date date_vol_depart,Date date_vol_arrive) {
+		return VolRepository.findvolByAirportsAndDate(aeroport_depart, aeroport_arrive, date_vol_depart,date_vol_arrive);
 		}
 	@Autowired
     public List<vol> getAllVols() {

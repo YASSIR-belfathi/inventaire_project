@@ -11,11 +11,11 @@ public class SignupRequest {
 
     @NotBlank
     @Size(min = 3, max = 20)
-    private String FirstName;
+    private String first_name;
     
     @NotBlank
     @Size(min = 3, max = 20)
-    private String LastName;
+    private String last_name;
 
     @NotBlank
     @Email
@@ -24,23 +24,23 @@ public class SignupRequest {
     
     @NotBlank
     @Size(min = 6, max = 40)
-    private String Nationalite;
+    private String nationalite;
     
     @NotBlank
     @Size(min = 6, max = 40)
-    private String CIN;
+    private String cin;
     
     @NotBlank
     @Size(min = 6, max = 40)
-    private int numPass;
+    private int num_pass;
     
     @NotBlank
     @Size(min = 6, max = 40)
-    private LocalDate DateNaissance;
+    private LocalDate date_naissance;
     
     @NotBlank
     @Size(min = 6, max = 40)
-    private int Telephone; 
+    private int telephone; 
     
     @NotBlank
     @Size(min = 6, max = 40)
@@ -50,20 +50,24 @@ public class SignupRequest {
     private String role;
 
 
-	public String getFirstName() {
-		return FirstName;
+
+
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.FirstName = firstName;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
 	}
 
-	public String getLastName() {
-		return LastName;
+	
+
+	public String getLast_name() {
+		return last_name;
 	}
 
-	public void setLastName(String lastName) {
-		this.LastName = lastName;
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 	public String getPassword() {
@@ -91,42 +95,45 @@ public class SignupRequest {
 	}
 
 	public String getNationalite() {
-		return Nationalite;
+		return nationalite;
 	}
 
 	public void setNationalite(String nationalite) {
-		this.Nationalite = nationalite;
+		this.nationalite = nationalite;
 	}
 
-	public String getCIN() {
-		return CIN;
+	public String getCin() {
+		return cin;
 	}
 
-	public void setCIN(String CIN) {
-		this.CIN = CIN;
-	}
-	public int getNumPass() {
-		return numPass;
+	public void setCin(String cin) {
+		this.cin = cin;
 	}
 
-	public void setNumPass(int numPass) {
-		this.numPass = numPass;
+	public int getNum_pass() {
+		return num_pass;
 	}
 
-	public LocalDate getDateNaissance() {
-		return DateNaissance;
+	public void setNum_pass(int num_pass) {
+		this.num_pass = num_pass;
 	}
 
-	public void setDateNaissance(LocalDate dateNaissance) {
-		this.DateNaissance = dateNaissance;
+	public LocalDate getDate_naissance() {
+		return date_naissance;
+	}
+
+	public void setDate_naissance(LocalDate date_naissance) {
+		this.date_naissance = date_naissance;
 	}
 
 	public int getTelephone() {
-		return Telephone;
+		return telephone;
 	}
 
 	public void setTelephone(int telephone) {
-		this.Telephone = telephone;
+		this.telephone = telephone;
 	}
+
+
 
 }

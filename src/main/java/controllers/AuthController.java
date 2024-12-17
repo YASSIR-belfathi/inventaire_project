@@ -76,27 +76,26 @@ public class AuthController {
         }
         // Create new user's account
         if ("user".equals(signUpRequest.getRole())){
+
 		    Passager user = new Passager();
-	        user.setFirstName(signUpRequest.getFirstName());
-	        user.setLastName(signUpRequest.getLastName());
+	        user.setFirst_name(signUpRequest.getFirst_name());
+	        user.setLast_name(signUpRequest.getLast_name());
 	        user.setNationalite(signUpRequest.getNationalite());
-	        user.setDateNaissance(signUpRequest.getDateNaissance());
-	        user.setCIN(signUpRequest.getCIN());
-	        user.setNumPass(signUpRequest.getNumPass());
+	        user.setDate_naissance(signUpRequest.getDate_naissance());
+	        user.setCin(signUpRequest.getCin());
+	        user.setNum_pass(signUpRequest.getNum_pass());
 	        user.setTelephone(signUpRequest.getTelephone());
 	        user.setEmail(signUpRequest.getEmail());
 	        user.setPassword(encoder.encode(signUpRequest.getPassword()));
-	        user.setEmail(signUpRequest.getEmail());
 	        PassagerRepository.save(user);
         }
     	if("admin".equals(signUpRequest.getRole())) {
     		administrateur user = new administrateur();
-    		user.setFirstName(signUpRequest.getFirstName());
-	        user.setLastName(signUpRequest.getLastName());
+    		user.setFirst_name(signUpRequest.getFirst_name());
+	        user.setLast_name(signUpRequest.getLast_name());
 	        user.setEmail(signUpRequest.getEmail());
 	        user.setPassword(encoder.encode(signUpRequest.getPassword()));
 	        adminRepository.save(user);
-
     	}
      
         
