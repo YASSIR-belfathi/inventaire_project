@@ -2,7 +2,7 @@ package controllers;
 import Security.JwtUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import entities.ERole;
-import entities.Passager;
+import entities.*;
 import entities.RoleEntity;
 import payload.request.LoginRequest;
 import payload.request.SignupRequest;
@@ -11,7 +11,6 @@ import payload.response.MessageResponse;
 import repositories.RoleRepository;
 import repositories.UserRepository;
 import services.CustomUserDetails;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
 import java.util.Set;
 @ComponentScan
-@Controller
+@RestController
 @RequestMapping("/api/auth")
 @CrossOrigin
 
@@ -35,6 +34,10 @@ public class AuthController {
     AuthenticationManager authenticationManager;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserRepository PassagerRepository;
+    @Autowired
+    UserRepository adminRepository;
     @Autowired
     RoleRepository roleRepository;
     @Autowired
@@ -66,24 +69,40 @@ public class AuthController {
 
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), roles));
     }
-   @PostMapping("/signup")
+   @PostMapping(value="/signup",produces = "application/json")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken"));
         }
         // Create new user's account
-	    Passager user = new Passager();
-        user.setFirstName(signUpRequest.getFirstName());
-        user.setLastName(signUpRequest.getLastName());
-        user.setNationalite(signUpRequest.getNationalite());
-        user.setDateNaissance(signUpRequest.getDateNaissance());
-        user.setCIN(signUpRequest.getCIN());
-        user.setNumPass(signUpRequest.getNumPass());
-        user.setTelephone(signUpRequest.getTelephone());
-        user.setEmail(signUpRequest.getEmail());
-        user.setPassword(encoder.encode(signUpRequest.getPassword()));
+        if ("user".equals(signUpRequest.getRole())){
+		    Passager user = new Passager();
+	        user.setFirstName(signUpRequest.getFirstName());
+	        user.setLastName(signUpRequest.getLastName());
+	        user.setNationalite(signUpRequest.getNationalite());
+	        user.setDateNaissance(signUpRequest.getDateNaissance());
+	        user.setCIN(signUpRequest.getCIN());
+	        user.setNumPass(signUpRequest.getNumPass());
+	        user.setTelephone(signUpRequest.getTelephone());
+	        user.setEmail(signUpRequest.getEmail());
+	        user.setPassword(encoder.encode(signUpRequest.getPassword()));
+	        user.setEmail(signUpRequest.getEmail());
+	        PassagerRepository.save(user);
+        }
+    	if("admin".equals(signUpRequest.getRole())) {
+    		administrateur user = new administrateur();
+    		user.setFirstName(signUpRequest.getFirstName());
+	        user.setLastName(signUpRequest.getLastName());
+	        user.setEmail(signUpRequest.getEmail());
+	        user.setPassword(encoder.encode(signUpRequest.getPassword()));
+	        adminRepository.save(user);
+
+    	}
+     
         
-        Set<String> strRoles = signUpRequest.getRole();
+
+        
+    /*    Set<String> strRoles = signUpRequest.getRole();
         Set<RoleEntity> roles = new HashSet<>();
 
         if (strRoles == null) {
@@ -103,8 +122,8 @@ public class AuthController {
                 }
             });
         }
-        user.setRoles(roles);
-        userRepository.save(user);
+        user.setRoles(roles);*/
+	        
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }

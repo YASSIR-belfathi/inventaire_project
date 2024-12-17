@@ -47,7 +47,7 @@ public class SignupRequest {
     private String password;
     
  
-    private Set<String> role;
+    private String role;
 
 
 	public String getFirstName() {
@@ -82,11 +82,11 @@ public class SignupRequest {
 		this.email = email;
 	}
 
-	public Set<String> getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Set<String> role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

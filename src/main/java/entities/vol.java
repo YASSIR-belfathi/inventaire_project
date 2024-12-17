@@ -2,6 +2,8 @@ package entities;
 import jakarta.persistence.*;
 import java.util.Date;
 
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 public class vol {
 	@Id
@@ -24,6 +26,7 @@ public class vol {
 	@Column(nullable = false)
 	private int capacite;
 	@Column(nullable = false)
+	@ColumnDefault(value="0")
 	private int places_reservees = 0;
 
 	public vol() {}

@@ -58,10 +58,7 @@ public class SecurityConfig {
 	                        .requestMatchers("/api/passengers/**").permitAll()
 	                        .requestMatchers("/api/vols/get-vols").permitAll()
 	                        .requestMatchers("/api/vols/add-vols").permitAll()
-
-	                        
 	                        .requestMatchers(HttpMethod.DELETE, "/reservations/cancel/**").permitAll()
-
 	                        .anyRequest().authenticated()
 	                );
 	        http.authenticationProvider(authenticationProvider());
