@@ -13,7 +13,8 @@ public class PassagerService {
 
 
     private ReservationRepository reservationRepository ;
-
+    /*modification*/
+/*
     @Autowired
     public PassagerService(ReservationRepository reservationRepository){
         this.reservationRepository = reservationRepository;
@@ -42,6 +43,6 @@ public class PassagerService {
     		throw new IllegalArgumentException("Reservation avec l'ID " + id + " non trouvée.");
     	}
 		  
-        }
+        }*/
 
 }

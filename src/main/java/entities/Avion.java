@@ -21,6 +21,11 @@ public class Avion {
 		this.annee_fabrication = annee_fabrication;
 		this.model = model;
 	}
+
+	public Avion() {
+
+	}
+
 	public String getType_avion() {
 		return type_avion;
 	}

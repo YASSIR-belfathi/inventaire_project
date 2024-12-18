@@ -2,7 +2,7 @@ package entities;
 import jakarta.persistence.*;
 
 @Entity
-public class Aeoroport {
+public class Aeroport {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,7 +16,7 @@ public class Aeoroport {
 	private String pays;
 	@Column
 	private int capacite;
-	public Aeoroport(String aeoroport_IATA, String nom_aeroport, String ville, String pays, int capacite) {
+	public Aeroport(String aeoroport_IATA, String nom_aeroport, String ville, String pays, int capacite) {
 		this.aeoroport_IATA = aeoroport_IATA;
 		this.nom_aeroport = nom_aeroport;
 		this.ville = ville;
@@ -53,6 +53,12 @@ public class Aeoroport {
 	public void setCapacite(int capacite) {
 		this.capacite = capacite;
 	}
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

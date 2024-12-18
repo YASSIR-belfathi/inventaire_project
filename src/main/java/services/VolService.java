@@ -2,6 +2,7 @@ package services;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,10 +20,21 @@ public class VolService {
 	         Date date_vol) {
 		return VolRepository.findvolByAirportsAndDate(aeroport_depart, aeroport_arrive, date_vol);
 		}
-	@Autowired
+	/*modification*/
+	/*@Autowired*/
     public List<vol> getAllVols() {
         return VolRepository.findAll();
     }
+
+	/*modification*/
+	public Optional<vol> getVolById(Long volId) {
+		return VolRepository.findById(volId);
+	}
+/* modification*/
+	public vol save(vol vol) {
+		return VolRepository.save(vol); // Utilisation de la méthode save du repository
+	}
+
 /*	@Autowired
     public vol createFlight(VolRequest VolRequest) {
         vol vol = new vol();

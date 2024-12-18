@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/*modification*/
+import services.VolService;
 import entities.Passager;
 import entities.Reservation;
 import entities.vol;
@@ -15,10 +17,14 @@ import repositories.ReservationRepository;
 import repositories.VolRepository;
 
 @Service
+@RequiredArgsConstructor
 public class ReservationService {
-
+    /*modification*/
     @Autowired
-    private ReservationRepository reservationRepository;
+    private VolService volService;
+
+
+    private final ReservationRepository reservationRepository;
 
     @Autowired
     private VolRepository volRepository;
@@ -61,4 +67,30 @@ public class ReservationService {
         Date today = new Date();
         return reservationRepository.findReservationsHistory(passengerId, today);
     }
+
+    /*modification*/
+
+    public Reservation reserverPlaces(Long volId, String nom, String prenom, int age, int nombrePlaces) {
+        vol vol = volService.getVolById(volId).orElseThrow(() -> new RuntimeException("Vol non trouvé"));
+
+        if (vol.getCapacite() - vol.getPlaces_reservees() < nombrePlaces) {
+            throw new RuntimeException("Pas assez de places disponibles");
+        }
+
+        Reservation reservation = new Reservation();
+        reservation.setVol(vol);
+        reservation.setPassagerNom(nom);
+        reservation.setPassagerPrenom(prenom);
+        reservation.setPassagerAge(age);
+        reservation.setNombrePlaces(nombrePlaces);
+
+        vol.setPlaces_reservees(vol.getPlaces_reservees() + nombrePlaces);
+        /*volService.save(vol);*/
+
+        return reservationRepository.save(reservation);
+
+    }
+
+
+
 }

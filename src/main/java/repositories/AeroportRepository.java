@@ -3,13 +3,13 @@ package repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import entities.Avion;
+import entities.Aeroport;
 
 import java.util.List;
 
 @Repository
 
-public interface AvionRepository extends JpaRepository<Avion, Long>{
+public interface AeroportRepository extends JpaRepository<Aeroport, Long>{
+    List<Aeroport> id(Long id);
 
-    List<Avion> id(Long id);
 }

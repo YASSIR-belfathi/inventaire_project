@@ -14,12 +14,12 @@ public class AdminService {
 
 	private Membre_equipageRepository membre_equipageRepository ;
 	private AvionRepository avionRepository;
-	private AeoroportRepository aeoroportRepository;
+	private AeroportRepository aeoroportRepository;
 	private VolRepository volRepository ;
 
     @Autowired
     public AdminService(ReservationRepository reservationRepository, Membre_equipageRepository membre_equipageRepository
-    		,AvionRepository avionRepository,AeoroportRepository aeoroportRepository,VolRepository volRepository){
+    		, AvionRepository avionRepository, AeroportRepository aeoroportRepository, VolRepository volRepository){
         this.membre_equipageRepository=membre_equipageRepository;
         this.aeoroportRepository=aeoroportRepository;
         this.avionRepository =avionRepository;
@@ -80,7 +80,7 @@ public class AdminService {
 		  
         }
     //methode de l'aeoroport
-    public Aeoroport addAeoroport(Aeoroport a) {
+    public Aeroport addAeoroport(Aeroport a) {
         return aeoroportRepository.save(a);
     }
     
@@ -88,10 +88,10 @@ public class AdminService {
     	aeoroportRepository.deleteById(id);
     }
 	
-    public Aeoroport updateAeoroport(long id, Aeoroport updatedAeoroport) {
-        Optional<Aeoroport> existingAeoroport = aeoroportRepository.findById(id);
+    public Aeroport updateAeoroport(long id, Aeroport updatedAeoroport) {
+        Optional<Aeroport> existingAeoroport = aeoroportRepository.findById(id);
     	if(existingAeoroport.isPresent()) {
-    		Aeoroport existingAeoroport1 = existingAeoroport.get();
+    		Aeroport existingAeoroport1 = existingAeoroport.get();
 
     		existingAeoroport1.setAeoroport_IATA(updatedAeoroport.getAeoroport_IATA());
     		existingAeoroport1.setNom_aeroport(updatedAeoroport.getNom_aeroport());
@@ -128,7 +128,10 @@ public class AdminService {
     	}
 		  
         }
-    
+
+        /*modification*/
+
+
     
 
 }

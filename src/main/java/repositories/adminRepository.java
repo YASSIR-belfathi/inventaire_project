@@ -8,4 +8,5 @@ import entities.administrateur;
 
 public interface adminRepository extends JpaRepository<administrateur, Long>{
 
+    administrateur findByEmail(String email);
 }

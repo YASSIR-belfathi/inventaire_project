@@ -16,8 +16,21 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    
+
+
     @PostMapping("/create")
+    public Reservation reserverVol(@RequestParam Long volId,
+                                   @RequestParam String nom,
+                                   @RequestParam String prenom,
+                                   @RequestParam int age,
+                                   @RequestParam int nombrePlaces) {
+        return reservationService.reserverPlaces(volId, nom, prenom, age, nombrePlaces);
+    }
+
+
+
+    /*
+
     public ResponseEntity<?> createReservation(@RequestBody ReservationRequest request) {
         try {
             Reservation reservation = reservationService.createReservation(
@@ -29,8 +42,8 @@ public class ReservationController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
-
+    }*/
+/*
     @DeleteMapping("/cancel/{reservationId}")
     public ResponseEntity<?> cancelReservation(@PathVariable Long reservationId) {
         try {
@@ -39,5 +52,5 @@ public class ReservationController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
+    }*/
 }

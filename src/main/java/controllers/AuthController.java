@@ -41,14 +41,19 @@ public class AuthController {
     PasswordEncoder encoder;
     @Autowired
     JwtUtils jwtUtils;
+    /*modification*/
+
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";  // Renvoie la page login.html
     }
+    /*
     @GetMapping("/signup")
     public String showsignupPage() {
         return "signup";  // Renvoie la page signup.html
     }
+    */
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
