@@ -59,7 +59,14 @@ public class SecurityConfig {
 							.requestMatchers("/reservations/create").permitAll()
 							.requestMatchers("/avion/create").permitAll()
 							.requestMatchers("/avion/list").permitAll()
+							.requestMatchers("/avion/delete/**").permitAll()
 							.requestMatchers("/avion/{id}").permitAll()
+							.requestMatchers("/aeroport/list").permitAll()
+							.requestMatchers("/aeroport/create").permitAll()
+							.requestMatchers("/aeroport/delete/**").permitAll()
+							.requestMatchers("/aeroport/MiseAjour/**").permitAll()
+							.requestMatchers("/avion/MiseAjour/**").permitAll()
+							.requestMatchers("/aeroport/{id}").permitAll()
 
 
 

@@ -23,6 +23,11 @@ public class Aeroport {
 		this.pays = pays;
 		this.capacite = capacite;
 	}
+
+	public Aeroport() {
+
+	}
+
 	public String getAeoroport_IATA() {
 		return aeoroport_IATA;
 	}
