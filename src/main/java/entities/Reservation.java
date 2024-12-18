@@ -1,6 +1,9 @@
 package entities;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -61,12 +64,22 @@ public class Reservation {
     @JoinColumn(name = "passager_id", nullable = false)
     @JsonIgnore
     private Passager passager;
+    //pour qu'un passager peut reserver pour lui-meme et d'autres passagers
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Passager> additionalPassengers = new ArrayList<>();
     
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public List<Passager> getAdditionalPassengers() {
+		return additionalPassengers;
+	}
+	public void setAdditionalPassengers(List<Passager> additionalPassengers) {
+		this.additionalPassengers = additionalPassengers;
 	}
 	public vol getVol() {
 		return vol;

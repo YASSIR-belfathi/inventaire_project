@@ -47,7 +47,7 @@ public class SignupRequest {
     private String password;
     
  
-    private String role;
+    private Set<String> role;
 
 
 
@@ -59,9 +59,6 @@ public class SignupRequest {
 	public void setFirst_name(String first_name) {
 		this.first_name = first_name;
 	}
-
-	
-
 	public String getLast_name() {
 		return last_name;
 	}
@@ -86,14 +83,19 @@ public class SignupRequest {
 		this.email = email;
 	}
 
-	public String getRole() {
+
+
+	public Set<String> getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Set<String> role) {
 		this.role = role;
 	}
-
+	public String getFirstRole() {
+        return role.stream().findFirst().orElse(null);
+    }
+	
 	public String getNationalite() {
 		return nationalite;
 	}

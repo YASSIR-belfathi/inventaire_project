@@ -61,7 +61,6 @@ public class Passager extends User{
 	public void setDate_naissance(LocalDate date_naissance) {
 		this.date_naissance = date_naissance;
 	}
-
 	//un passager peut avoir plusieurs reservations 
     @OneToMany(mappedBy = "passager")
     private List<Reservation> reservations;

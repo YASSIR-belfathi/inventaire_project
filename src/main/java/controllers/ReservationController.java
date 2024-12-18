@@ -20,7 +20,8 @@ public class ReservationController {
             Reservation reservation = reservationService.createReservation(
                 request.getVolId(),
                 request.getPassagerId(),
-                request.getPrixTotal()
+                request.getPrixTotal(),
+                request.getAdditionalPassengers()
             );
             return ResponseEntity.ok(reservation);
         } catch (Exception e) {

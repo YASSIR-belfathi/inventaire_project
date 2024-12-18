@@ -25,7 +25,7 @@ public class ReservationService {
     @Autowired
     private PassagerRepository passagerRepository;
 
-    public Reservation createReservation(Long volId, Long passagerId, int prixTotal) throws Exception {
+    public Reservation createReservation(Long volId, Long passagerId, int prixTotal,List<Passager> additionalPassengers) throws Exception {
         vol vol = volRepository.findById(volId)
                 .orElseThrow(() -> new Exception("Vol introuvable"));
         Passager passager = passagerRepository.findById(passagerId)
@@ -39,6 +39,7 @@ public class ReservationService {
         reservation.setStatus("Confirmed"); 
         reservation.setPrix_total(prixTotal);
         reservation.setVol(vol); 
+        reservation.setAdditionalPassengers(additionalPassengers); 
         reservation.setPassager(passager); 
         return reservationRepository.save(reservation);
     }

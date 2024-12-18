@@ -16,6 +16,7 @@ public class Aeoroport {
 	private String pays;
 	@Column
 	private int capacite;
+	public Aeoroport() {}
 	public Aeoroport(String aeoroport_IATA, String nom_aeroport, String ville, String pays, int capacite) {
 		this.aeoroport_IATA = aeoroport_IATA;
 		this.nom_aeroport = nom_aeroport;

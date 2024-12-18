@@ -97,9 +97,6 @@ public class AuthController {
 	        user.setPassword(encoder.encode(signUpRequest.getPassword()));
 	        adminRepository.save(user);
     	}
-     
-        
-
         
     /*    Set<String> strRoles = signUpRequest.getRole();
         Set<RoleEntity> roles = new HashSet<>();

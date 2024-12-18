@@ -15,6 +15,7 @@ public class Avion {
 	private Date annee_fabrication;
     @Column
 	private String model;
+    public Avion() {}
 	public Avion(String type_avion, int capacite, Date annee_fabrication, String model) {
 		this.type_avion = type_avion;
 		this.capacite = capacite;
