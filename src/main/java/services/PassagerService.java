@@ -1,22 +1,27 @@
 package services;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import entities.Reservation;
+import entities.*;
+import payload.request.PassagerRequest;
 import repositories.*;
 
 @Service
 public class PassagerService {
 
 
+    
+    private PassagerRepository PassagerRepository;
     private ReservationRepository reservationRepository ;
-
     @Autowired
-    public PassagerService(ReservationRepository reservationRepository){
+    public PassagerService(PassagerRepository PassagerRepository,ReservationRepository reservationRepository){
         this.reservationRepository = reservationRepository;
+        this.PassagerRepository = PassagerRepository;
     }
 
     @Transactional
@@ -26,6 +31,18 @@ public class PassagerService {
     
     public void removeReservation(long id) {
     	reservationRepository.deleteById(id);
+    }
+    public List<PassagerRequest> getAllPassengers() {
+        List<Passager> passengers = PassagerRepository.findAll();
+        return passengers.stream().map(passenger -> new PassagerRequest(
+        	passenger.getId(),
+            passenger.getEmail(),
+            passenger.getFirst_name(),
+            passenger.getLast_name(),
+            passenger.getNationalite(),
+            0, passenger.getCin(),
+            null, passenger.getTelephone(), null
+        )).collect(Collectors.toList());
     }
 	
     public Reservation updateReservation(long id, Reservation updatedReservation) {
