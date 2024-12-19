@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form action="/signup" method="post" onsubmit="submitSignupForm(event)">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="role">Role:</label><br>
+        <select id="role" name="role" required>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select><br><br>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <p id="responseMessage" style="color: green;"></p>
+
+    <script>
+        // Function to handle form submission using JavaScript fetch
+        async function submitSignupForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const role = document.getElementById("role").value;
+
+            const signupRequest = {
+                username: username,
+                password: password,
+                role: [role] // Send roles as an array
+            };
+
+            try {
+                const response = await fetch("/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(signupRequest)
+                });
+
+                if (response.ok) {
+                    document.getElementById("responseMessage").textContent = "User registered successfully!";
+                } else {
+                    const errorData = await response.json();
+                    document.getElementById("responseMessage").textContent = errorData.message || "Error during signup.";
+                    document.getElementById("responseMessage").style.color = "red";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById("responseMessage").textContent = "An unexpected error occurred.";
+                document.getElementById("responseMessage").style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
