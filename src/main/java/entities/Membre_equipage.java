@@ -15,6 +15,10 @@ public class Membre_equipage {
 	private String num_licence;
 	@Column
 	private String nationalite;
+
+	public Membre_equipage() {
+	}
+
 	public Membre_equipage(String nom_complet, String fonction, String num_licence, String nationalite) {
 		this.nom_complet = nom_complet;
 		this.fonction = fonction;
@@ -45,8 +49,12 @@ public class Membre_equipage {
 	public void setNationalite(String nationalite) {
 		this.nationalite = nationalite;
 	}
-	
-	
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

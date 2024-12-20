@@ -68,6 +68,15 @@ public class SecurityConfig {
 							.requestMatchers("/avion/MiseAjour/**").permitAll()
 							.requestMatchers("/aeroport/{id}").permitAll()
 
+							.requestMatchers("/membres/create").permitAll()
+							.requestMatchers("/membres/list").permitAll()
+							.requestMatchers("/membres/{id}").permitAll()
+							.requestMatchers("/membres/update/{id}").permitAll()
+							.requestMatchers("/membres/delete/{id}").permitAll()
+
+
+
+
 
 
 							.requestMatchers(HttpMethod.DELETE, "/reservations/cancel/**").permitAll()
