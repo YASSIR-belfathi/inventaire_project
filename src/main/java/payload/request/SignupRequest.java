@@ -47,7 +47,7 @@ public class SignupRequest {
     private String password;
     
  
-    private Set<String> role;
+    private String role;
 
 
 
@@ -85,16 +85,16 @@ public class SignupRequest {
 
 
 
-	public Set<String> getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Set<String> role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
-	public String getFirstRole() {
+	/*public String getFirstRole() {
         return role.stream().findFirst().orElse(null);
-    }
+    }*/
 	
 	public String getNationalite() {
 		return nationalite;
