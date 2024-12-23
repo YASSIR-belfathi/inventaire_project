@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,23 +25,28 @@ public class AeroportController {
     public AeroportController(AeroportService aeroportService) {
         this.aeroportService = aeroportService;
     }
+
+    @CrossOrigin
     @PostMapping("/create")
     public ResponseEntity<Aeoroport> creerAeroport(@RequestBody Aeoroport aeroport) {
         return new ResponseEntity<>(aeroportService.creerAeroport(aeroport), HttpStatus.CREATED);
     }
+
     @GetMapping("/lister")
     public ResponseEntity<List<Aeoroport>> listerAeroports() {
         return ResponseEntity.ok(aeroportService.listerAeroports());
     }
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<Aeoroport> mettreAJourAeroport(@PathVariable Long id, @RequestBody Aeoroport detailsAeroport) {
+    public ResponseEntity<Aeoroport> mettreAJourAeroport(@PathVariable Long id,
+            @RequestBody Aeoroport detailsAeroport) {
         Aeoroport aeroportMisAJour = aeroportService.mettreAJourAeroport(id, detailsAeroport);
         return ResponseEntity.ok(aeroportMisAJour);
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> supprimerAeroport(@PathVariable Long id) {
         aeroportService.supprimerAeroport(id);
         return ResponseEntity.noContent().build();
     }
 }
-
