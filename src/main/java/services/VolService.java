@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import entities.vol;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import payload.request.VolRequest;
 import repositories.VolRepository;
 
@@ -41,13 +43,12 @@ public class VolService {
         return VolRepository.save(vol);
     }
 
-    public void DeleteVol(Long id) {
-        Optional<vol> optionalVol = VolRepository.findById(id);
+    @Transactional
+    public void deleteVolAndReservations(Long volId) {
+        // First, delete the dependent reservations
+        VolRepository.deleteReservationsByVolId(volId);
 
-        if (optionalVol.isPresent()) {
-            VolRepository.deleteById(id);
-        } else {
-            System.out.println("il n'existe pas de vol de cet id");
-        }
+        // Then, delete the vol
+        VolRepository.deleteVolById(volId);
     }
 }

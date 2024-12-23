@@ -38,10 +38,9 @@ public class VolController {
         return new ResponseEntity<>(vol, HttpStatus.CREATED);
     }
 
-    @CrossOrigin
-    @DeleteMapping("/delete-vols/{id}")
-    public ResponseEntity<vol> deleteVol(@PathVariable("id") Long id) {
-        volService.DeleteVol(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @DeleteMapping("/delete-vol/{id}")
+    public ResponseEntity<Void> supprimerVol(@PathVariable Long id) {
+        volService.deleteVolAndReservations(id);
+        return ResponseEntity.noContent().build();
     }
 }
