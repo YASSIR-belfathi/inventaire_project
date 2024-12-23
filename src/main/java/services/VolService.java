@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import entities.vol;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import payload.request.VolRequest;
 import repositories.VolRepository;
 
@@ -32,5 +34,13 @@ public class VolService {
         vol.setAeroport_arrive(VolRequest.getAeroport_arrive());
         vol.setCapacite(VolRequest.getCapacite());
         return VolRepository.save(vol);
+    }
+    @Transactional
+    public void deleteVolAndReservations(Long volId) {
+        // First, delete the dependent reservations
+        VolRepository.deleteReservationsByVolId(volId);
+        
+        // Then, delete the vol
+        VolRepository.deleteVolById(volId);
     }
 }
